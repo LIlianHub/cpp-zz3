@@ -7,6 +7,7 @@
 #include <cartesien.hpp>
 #include <polaire.hpp>
 #include <nuage.hpp>
+#include <vecteur.hpp>
 
 // Tests //-----------------------------------------------------------------------------------------
 
@@ -343,4 +344,83 @@ TEST_CASE ( "TP1_Nuage::BarycentrePolaire" ) {
  REQUIRE ( b.getDistance() == Approx(p.getDistance()) );
 }
 
-// Fin //-------------------------------------------------------------------------------------------
+// Vecteur //-------------------------------------------------------------------------------------------
+
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
+#include "vecteur.hpp"
+
+TEST_CASE("Tests de la classe Vecteur", "[Vecteur]") {
+    SECTION("Test du constructeur par défaut") {
+        Vecteur v1;
+        REQUIRE(v1.size() == 0);
+    }
+
+    SECTION("Test du constructeur par copie") {
+        Vecteur v1;
+        v1[0] = 42;
+        Vecteur v2 = v1;
+        REQUIRE(v2.size() == 1);
+        REQUIRE(v2[0] == 42);
+    }
+
+    SECTION("Test de l'opérateur d'affectation") {
+        Vecteur v1;
+        v1[0] = 42;
+        Vecteur v2;
+        v2 = v1;
+        REQUIRE(v2.size() == 1);
+        REQUIRE(v2[0] == 42);
+    }
+
+    SECTION("Test de l'opérateur de multiplication") {
+        Vecteur v1;
+        v1[0] = 1;
+        v1[1] = 2;
+        Vecteur v2;
+        v2[0] = 3;
+        v2[1] = 4;
+        int produit = v1 * v2;
+        REQUIRE(produit == 11); // 1*3 + 2*4 = 11
+    }
+
+
+}
+
+TEST_CASE("Tests de la classe Iterateur", "[Iterateur]") {
+    SECTION("Test de l'opérateur de pré-incrémentation") {
+        Vecteur v;
+        v[0] = 1;
+        v[1] = 2;
+        Iterateur it = v.begin();
+        ++it;
+        REQUIRE(*it == 2);
+    }
+
+    SECTION("Test de l'opérateur de post-incrémentation") {
+        Vecteur v;
+        v[0] = 1;
+        v[1] = 2;
+        Iterateur it = v.begin();
+        Iterateur it2 = it++;
+        REQUIRE(*it == 2);
+        REQUIRE(*it2 == 1);
+    }
+
+    SECTION("Test de l'opérateur d'accès") {
+        Vecteur v;
+        v[0] = 42;
+        Iterateur it = v.begin();
+        REQUIRE(*it == 42);
+    }
+
+    SECTION("Test de l'opérateur d'égalité") {
+        Vecteur v;
+        v[0] = 1;
+        Iterateur it1 = v.begin();
+        Iterateur it2 = v.begin();
+        REQUIRE(it1 == it2);
+    }
+
+}
+
