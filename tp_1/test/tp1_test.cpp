@@ -346,81 +346,133 @@ TEST_CASE ( "TP1_Nuage::BarycentrePolaire" ) {
 
 // Vecteur //-------------------------------------------------------------------------------------------
 
-#define CATCH_CONFIG_MAIN
-#include "catch.hpp"
-#include "vecteur.hpp"
 
-TEST_CASE("Tests de la classe Vecteur", "[Vecteur]") {
-    SECTION("Test du constructeur par défaut") {
-        Vecteur v1;
-        REQUIRE(v1.size() == 0);
-    }
-
-    SECTION("Test du constructeur par copie") {
-        Vecteur v1;
-        v1[0] = 42;
-        Vecteur v2 = v1;
-        REQUIRE(v2.size() == 1);
-        REQUIRE(v2[0] == 42);
-    }
-
-    SECTION("Test de l'opérateur d'affectation") {
-        Vecteur v1;
-        v1[0] = 42;
-        Vecteur v2;
-        v2 = v1;
-        REQUIRE(v2.size() == 1);
-        REQUIRE(v2[0] == 42);
-    }
-
-    SECTION("Test de l'opérateur de multiplication") {
-        Vecteur v1;
-        v1[0] = 1;
-        v1[1] = 2;
-        Vecteur v2;
-        v2[0] = 3;
-        v2[1] = 4;
-        int produit = v1 * v2;
-        REQUIRE(produit == 11); // 1*3 + 2*4 = 11
-    }
-
-
+TEST_CASE("Vecteur::Vecteur()") {
+    Vecteur v;
+    REQUIRE(v.size() == 0);
 }
 
-TEST_CASE("Tests de la classe Iterateur", "[Iterateur]") {
-    SECTION("Test de l'opérateur de pré-incrémentation") {
-        Vecteur v;
-        v[0] = 1;
-        v[1] = 2;
-        Iterateur it = v.begin();
-        ++it;
-        REQUIRE(*it == 2);
-    }
-
-    SECTION("Test de l'opérateur de post-incrémentation") {
-        Vecteur v;
-        v[0] = 1;
-        v[1] = 2;
-        Iterateur it = v.begin();
-        Iterateur it2 = it++;
-        REQUIRE(*it == 2);
-        REQUIRE(*it2 == 1);
-    }
-
-    SECTION("Test de l'opérateur d'accès") {
-        Vecteur v;
-        v[0] = 42;
-        Iterateur it = v.begin();
-        REQUIRE(*it == 42);
-    }
-
-    SECTION("Test de l'opérateur d'égalité") {
-        Vecteur v;
-        v[0] = 1;
-        Iterateur it1 = v.begin();
-        Iterateur it2 = v.begin();
-        REQUIRE(it1 == it2);
-    }
-
+TEST_CASE("Vecteur::Vecteur(const int, cont int*)") {
+    int arr[] = {1, 2, 3};
+    Vecteur v(3, arr);
+    REQUIRE(v.size() == 3);
+    REQUIRE(v[0] == 1);
+    REQUIRE(v[1] == 2);
+    REQUIRE(v[2] == 3);
 }
+
+TEST_CASE("Vecteur::Vecteur(const Vecteur&)") {
+    int arr[] = {1, 2, 3};
+    Vecteur original(3, arr);
+    Vecteur v(original);
+    REQUIRE(v.size() == original.size());
+    REQUIRE(v[0] == original[0]);
+    REQUIRE(v[1] == original[1]);
+    REQUIRE(v[2] == original[2]);
+}
+
+TEST_CASE("Vecteur::operator=") {
+    int arr1[] = {1, 2, 3};
+    int arr2[] = {4, 5, 6};
+    Vecteur v1(3, arr1);
+    Vecteur v2(3, arr2);
+    v1 = v2;
+    REQUIRE(v1.size() == v2.size());
+    REQUIRE(v1[0] == v2[0]);
+    REQUIRE(v1[1] == v2[1]);
+    REQUIRE(v1[2] == v2[2]);
+}
+
+TEST_CASE("Vecteur::operator+") {
+    int arr1[] = {1, 2, 3};
+    int arr2[] = {4, 5, 6};
+    Vecteur v1(3, arr1);
+    Vecteur v2(3, arr2);
+    Vecteur result = v1 + v2;
+    REQUIRE(result.size() == 3);
+    REQUIRE(result[0] == 5);
+    REQUIRE(result[1] == 7);
+    REQUIRE(result[2] == 9);
+}
+
+TEST_CASE("Vecteur::operator+ exception") {
+    int arr1[] = {1, 2, 3, 5};
+    int arr2[] = {4, 5, 6};
+    Vecteur v1(4, arr1);
+    Vecteur v2(3, arr2);
+    CHECK_THROWS_AS(v1 + v2, SizeVectorException);
+}
+
+TEST_CASE("Vecteur::operator*") {
+    int arr1[] = {1, 2, 3};
+    int arr2[] = {4, 5, 6};
+    Vecteur v1(3, arr1);
+    Vecteur v2(3, arr2);
+    int result = v1 * v2;
+    REQUIRE(result == 32);
+}
+
+TEST_CASE("Vecteur::operator* exception") {
+    int arr1[] = {1, 2, 3, 5};
+    int arr2[] = {4, 5, 6};
+    Vecteur v1(4, arr1);
+    Vecteur v2(3, arr2);
+    CHECK_THROWS_AS(v1 * v2, SizeVectorException);
+}
+
+TEST_CASE("Vecteur::operator[]") {
+    int arr[] = {1, 2, 3};
+    Vecteur v(3, arr);
+    REQUIRE(v[0] == 1);
+    REQUIRE(v[1] == 2);
+    REQUIRE(v[2] == 3);
+
+    CHECK_THROWS_AS(v[3], InvalidAccesDataVector);
+    CHECK_THROWS_AS(v[-1], InvalidAccesDataVector);
+    CHECK_THROWS_AS(v[4], InvalidAccesDataVector);
+}
+
+TEST_CASE("Vecteur <<") {
+    int arr[] = {1, 2, 3};
+    Vecteur v(3, arr);
+
+    std::stringstream ss1, ss2;
+
+    ss1 << "[1, 2, 3]";
+    ss2 << v;
+
+    REQUIRE(ss1.str() == ss2.str());
+}
+
+TEST_CASE("Iterateur++") {
+    int arr[] = {1, 2, 3};
+    Vecteur v(3, arr);
+    Iterateur it = v.begin();
+    REQUIRE(*it == 1);
+    ++it;
+    REQUIRE(*it == 2);
+    it++;
+    REQUIRE(*it == 3);
+}
+
+TEST_CASE("Iterateur== !=") {
+    int arr[] = {1, 2, 3};
+    Vecteur v(3, arr);
+    Iterateur it1 = v.begin();
+    Iterateur it2 = v.begin();
+    REQUIRE(it1 == it2);
+    ++it1;
+    REQUIRE(it1 != it2);
+}
+
+TEST_CASE("Iterateur for parcours") {
+    int arr[] = {1, 2, 3};
+    Vecteur v(3, arr);
+    int expected[] = {1, 2, 3};
+    int i = 0;
+    for (int val : v) {
+        REQUIRE(val == expected[i++]);
+    }
+}
+
 
