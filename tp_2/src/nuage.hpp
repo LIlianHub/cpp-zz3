@@ -40,6 +40,8 @@ public:
     // iterator
 public:
     using const_iterator = typename std::vector<T>::const_iterator;
+
+    // value type pour avoir le même membre que vector
     using value_type = T;
 };
 
