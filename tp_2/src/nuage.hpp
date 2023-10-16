@@ -46,7 +46,7 @@ public:
 };
 
 
-// QUESTION 2 A décommenter avec les tests correspondant 4a et 4b
+// QUESTION 2: A décommenter avec les tests correspondant 3 et 4a
 /*template <typename GeneriquePoint>
 GeneriquePoint barycentre_v1(const Nuage<GeneriquePoint> & nuage)
 {
@@ -58,10 +58,6 @@ GeneriquePoint barycentre_v1(const Nuage<GeneriquePoint> & nuage)
     double sum_y = 0.0;
     double nb_element = 0.0;
 
-    // typename Nuage<U>::const_iterator it = nuage.begin();
-
-    // on enleve it car pas necessaire
-    //for (; it != nuage.end(); it++)
     for(const GeneriquePoint & point: nuage)
     {
         const Cartesien cartesien = Cartesien(point);
@@ -73,7 +69,7 @@ GeneriquePoint barycentre_v1(const Nuage<GeneriquePoint> & nuage)
     return GeneriquePoint(Cartesien(sum_x / nb_element, sum_y / nb_element));
 }*/
 
-// QUESTION 3 : test 5
+// QUESTION 3: test 4b
 template <typename GeneriquePoint>
 GeneriquePoint barycentre_v1(const Nuage<GeneriquePoint> & nuage)
 {
@@ -84,23 +80,17 @@ GeneriquePoint barycentre_v1(const Nuage<GeneriquePoint> & nuage)
     double sum_angle = 0.0;
     double sum_distance = 0.0;
 
-    // typename Nuage<U>::const_iterator it = nuage.begin();
-
-    // on enleve it car pas necessaire
-    //for (; it != nuage.end(); it++)
     for(const GeneriquePoint & point: nuage)
     {
         const Polaire polaire = Polaire(point);
         sum_angle += polaire.getAngle();
         sum_distance += polaire.getDistance();
-        //std::cout << polaire << std::endl;
     }
-
-    //std::cout << sum_angle / nuage.size() << " " << sum_distance / nuage.size() << std::endl;
 
     return GeneriquePoint(Polaire(sum_angle / nuage.size(), sum_distance / nuage.size()));
 }
 
+// QUESTION 4: test 5 à 7
 template <typename Conteneur>
 typename Conteneur::value_type barycentre_v2(const Conteneur & conteneur)
 {
