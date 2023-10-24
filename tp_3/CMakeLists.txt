@@ -38,12 +38,12 @@ message ( STATUS "Compiler flags: ${CMAKE_CXX_FLAGS}" )
 # Sources #-----------------------------------------------------------------------------------------
 set ( ZZ3_HEADERS
       src/chaine.hpp
-      #src/cosinus.hpp
+      src/cosinus.hpp
       src/demangle.hpp
-      #src/exception.hpp
-      #src/exponentielle.hpp
+      src/exponentielle.hpp
       src/factorielle.hpp
       src/puissance.hpp
+      src/sinus.hpp
     )
 
 set ( ZZ3_SOURCES
