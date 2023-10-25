@@ -11,4 +11,3 @@ TP de C++ de 3ème année à l'ISIMA
   - [x] Partie 2
 - [x] TP2
 - [x] TP3
-- [x] TP4
