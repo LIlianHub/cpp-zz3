@@ -4,9 +4,9 @@
 #include <puissance.hpp>
 #include <factorielle.hpp>
 
-template <long K>
+template <unsigned long K>
 struct Exponentielle {
-    static const double valeur(const double & x){
+    static const double valeur(const long double & x){
         return Exponentielle<K - 1>::valeur(x) + (Puissance<K>::valeur(x) / Factorielle<K>::valeur);
     }
 
@@ -14,7 +14,7 @@ struct Exponentielle {
 
 template <>
 struct Exponentielle<0> {
-    static const double valeur(const double & x){
+    static const double valeur(const long double & x){
         return 1;
     }
 };

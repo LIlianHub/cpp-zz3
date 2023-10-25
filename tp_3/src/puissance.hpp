@@ -2,9 +2,9 @@
 #define _PUISSANCE
 
 
-template <long P>
+template <unsigned long P>
 struct Puissance {
-    static const double valeur(const double & n){
+    static const double valeur(const long double & n){
         return Puissance<P-1>::valeur(n) * n;
     }
 
@@ -12,7 +12,7 @@ struct Puissance {
 
 template <>
 struct Puissance<0> {
-    static const double valeur(const double & n){
+    static const double valeur(const long double & n){
         return 1;
     }
 };

@@ -1,10 +1,14 @@
 # cpp-zz3
 
-## Avancement
+## Description
 
-- tp_1
-  * Partie 1: fini et complet
-  * Partie 2: fini et complet
+TP de C++ de 3ème année à l'ISIMA
 
-- tp_2
-  * fini et complet
+## TP disponible
+
+- [x] TP1
+  - [x] Partie 1
+  - [x] Partie 2
+- [x] TP2
+- [x] TP3
+- [x] TP4

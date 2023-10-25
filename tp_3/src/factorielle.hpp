@@ -2,7 +2,7 @@
 #define _FACTORIELLE
 
 
-template <long N>
+template <unsigned long N>
 struct Factorielle {
     static const long valeur = N * Factorielle<N - 1>::valeur;
 };
