@@ -48,6 +48,18 @@ class Vecteur {
 
    return *this;
   }
+
+  //-------------------------------------------------------------------------------Affectation mouvement
+  Vecteur & operator=(Vecteur && v) {
+   if (this!=&v) {
+    taille_= v.taille_;
+    delete[] tableau_;
+    tableau_=v.tableau_;
+    v.tableau_=nullptr;
+   }
+
+   return *this;
+  }
 };
 
 // Surcharge operateurs //--------------------------------------------------------------------------

@@ -12,13 +12,14 @@ struct Complexe {
  double imaginaire;
 
  Complexe(double r = 0.0,double i = 0.0) : reel(r),imaginaire(i) {}
+
 };
 
 // Mouchard ? //------------------------------------------------------------------------------------
 using complexe_t = Mouchard<Complexe>;
 //using complexe_t = Complexe;
 
-// Surcharge opérateurs //--------------------------------------------------------------------------
+// Surcharge opï¿½rateurs //--------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------operator+
 inline complexe_t operator+(const complexe_t & a,const complexe_t & b) {
