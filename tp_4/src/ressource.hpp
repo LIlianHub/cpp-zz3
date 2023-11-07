@@ -25,7 +25,7 @@ using ressources_t = std::vector<std::weak_ptr<Ressource>>;
 
 std::ostream& operator<<(std::ostream& os, const ressources_t& ressources) {
     for(const std::weak_ptr<Ressource>& ressource : ressources){
-        if(ressource.expired()) 
+        if(ressource.expired())
             os << "- ";
         else
             os << ressource.lock().get()->getStock() << " ";
