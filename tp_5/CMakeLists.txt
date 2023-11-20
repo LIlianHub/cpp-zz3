@@ -15,11 +15,11 @@ endif ()
 # Sources #-----------------------------------------------------------------------------------------
 set ( PROJECT_HEADERS
       src/exemple.hpp
-      #src/classe.hpp
+      src/classe.hpp
       #src/comparateur.hpp
-      #src/echantillon.hpp
-      #src/histogramme.hpp
-      #src/valeur.hpp
+      src/echantillon.hpp
+      src/histogramme.hpp
+      src/valeur.hpp
     )
 
 set ( PROJECT_SOURCES

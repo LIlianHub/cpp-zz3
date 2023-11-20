@@ -6,7 +6,8 @@ class UsineCarte;
 class Carte{
     private:
         unsigned int _value = 0;
-        static unsigned int _cpt_creation;
+        // cpp17
+        inline static unsigned int _cpt_creation = 0;
 
     private:
         Carte() { _cpt_creation ++;}
@@ -26,7 +27,7 @@ class Carte{
     friend class UsineCarte;
 };
 
-unsigned int Carte::_cpt_creation = 0;
+//unsigned int Carte::_cpt_creation = 0;
 
 
 #endif
