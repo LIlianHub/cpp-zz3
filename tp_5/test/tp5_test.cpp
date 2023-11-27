@@ -4,13 +4,13 @@
 #include <cmath>
 
 #include <histogramme.hpp>
-//#include <comparateur.hpp>
+#include <comparateur.hpp>
 #include <valeur.hpp>
 #include <echantillon.hpp>
 #include <classe.hpp>
 
-using Histo = Histogramme; // A utiliser pour les tests 12-13
-//using Histo = Histogramme<>; // A utiliser a partir du test 14
+//using Histo = Histogramme; // A utiliser pour les tests 12-13
+using Histo = Histogramme<>; // A utiliser a partir du test 14
 
 // Tests //-----------------------------------------------------------------------------------------
 
@@ -209,7 +209,7 @@ TEST_CASE ( "TP5_Histogramme::Echantillon" ) {
 }
 
 //----------------------------------------------------------------------------------------------- 14
-/*TEST_CASE ( "TP5_Histogramme::Generique" ) {
+TEST_CASE ( "TP5_Histogramme::Generique" ) {
  using histo_t = Histogramme<>;
 
  histo_t h(5.0,15.0,5);
@@ -227,10 +227,10 @@ TEST_CASE ( "TP5_Histogramme::Echantillon" ) {
   REQUIRE ( c.getQuantite() == 0u );
   ++i;
  }
-}*/
+}
 
 //----------------------------------------------------------------------------------------------- 15
-/*TEST_CASE ( "TP5_Histogramme::FoncteurGreater" ) {
+TEST_CASE ( "TP5_Histogramme::FoncteurGreater" ) {
  using histo_t = Histogramme<std::greater<Classe>>;
 
  histo_t h(5.0,15.0,5);
@@ -248,10 +248,10 @@ TEST_CASE ( "TP5_Histogramme::Echantillon" ) {
   REQUIRE ( c.getBorneSup() == Approx(bornesSup[i]) );
   REQUIRE ( c.getQuantite() == 0u );
  }
-}*/
+}
 
 //----------------------------------------------------------------------------------------------- 16
-/*TEST_CASE ( "TP5_Histogramme::ComparateurQuantite" ) {
+TEST_CASE ( "TP5_Histogramme::ComparateurQuantite" ) {
  using histo_t = Histogramme<ComparateurQuantite<Classe>>;
 
  double v[] = { 7.0, 9.0, 8.0, 5.0, 10.0, 14.0, 13.0, 6.0, 5.5, 13.5 };
@@ -274,10 +274,10 @@ TEST_CASE ( "TP5_Histogramme::Echantillon" ) {
   REQUIRE ( c.getQuantite() == quantites[i] );
   ++i;
  }
-}*/
+}
 
 //------------------------------------------------------------------------------------------------17
-/*TEST_CASE ( "TP5_Histogramme::Conversion" ) {
+TEST_CASE ( "TP5_Histogramme::Conversion" ) {
  using histo1_t = Histogramme<std::greater<Classe>>;
  using histo2_t = Histogramme<ComparateurQuantite<Classe>>;
 
@@ -304,10 +304,10 @@ TEST_CASE ( "TP5_Histogramme::Echantillon" ) {
   REQUIRE ( c.getQuantite() == quantites[i] );
   ++i;
  }
-}*/
+}
 
 //----------------------------------------------------------------------------------------------- 18
-/*TEST_CASE ( "TP5_Etudiant::Constructeur" ) {
+TEST_CASE ( "TP5_Etudiant::Constructeur" ) {
  const double a = 12.0;
  const char * n = "Machin";
 
@@ -317,19 +317,19 @@ TEST_CASE ( "TP5_Histogramme::Echantillon" ) {
  REQUIRE ( v.getNote() == Approx(a) );
  REQUIRE ( v.getEtudiant().c_str() != 0);
  REQUIRE ( v.getEtudiant() == n );
-}*/
+}
 
 //----------------------------------------------------------------------------------------------- 19
-/*TEST_CASE ( "TP5_Etudiant::ConstructeurDefaut" ) {
+TEST_CASE ( "TP5_Etudiant::ConstructeurDefaut" ) {
  Valeur v;
 
  REQUIRE ( v.getNombre() == Approx(0.0) );
  REQUIRE ( v.getNote() == Approx(0.0) );
  REQUIRE ( v.getEtudiant() == "inconnu" );
-}*/
+}
 
 //----------------------------------------------------------------------------------------------- 20
-/*TEST_CASE ( "TP5_Etudiant::Accesseurs" ) {
+TEST_CASE ( "TP5_Etudiant::Accesseurs" ) {
  const double a = 12.0;
  const char * n = "Machin";
 
@@ -341,19 +341,19 @@ TEST_CASE ( "TP5_Histogramme::Echantillon" ) {
  REQUIRE ( v.getNombre() == Approx(a) );
  REQUIRE ( v.getNote() == Approx(a) );
  REQUIRE ( v.getEtudiant() == n );
-}*/
+}
 
 //----------------------------------------------------------------------------------------------- 21
-/*TEST_CASE ( "TP5_Etudiant::AccesseursConstants" ) {
+TEST_CASE ( "TP5_Etudiant::AccesseursConstants" ) {
  const Valeur v;
 
  REQUIRE ( v.getNombre() == Approx(0.0) );
  REQUIRE ( v.getNote() == Approx(0.0) );
  REQUIRE ( v.getEtudiant() == "inconnu" );
-}*/
+}
 
 //----------------------------------------------------------------------------------------------- 22
-/*TEST_CASE ( "TP5_Valeurs::Association" ) {
+TEST_CASE ( "TP5_Valeurs::Association" ) {
  using histo_t = Histogramme<>;
 
  double v[] = { 7.0, 9.0, 8.0, 5.0, 10.0, 14.0, 13.0, 6.0, 5.5, 13.5 };
@@ -377,7 +377,7 @@ TEST_CASE ( "TP5_Histogramme::Echantillon" ) {
   REQUIRE ( p.second.getNote() == Approx(notes[i]) );
   ++i;
  }
-}*/
+}
 
 //----------------------------------------------------------------------------------------------- 23
 /*TEST_CASE ( "TP5_Valeurs::Intervalle" ) {
@@ -416,5 +416,27 @@ TEST_CASE ( "TP5_Histogramme::Echantillon" ) {
   ++i;
  }
 }*/
+
+TEST_CASE ( "TP5_Valeurs::display" ) {
+  using histo2_t = Histogramme<ComparateurQuantite<Classe>>;
+  using histo1_t = Histogramme<>;
+  double v[] = { 3.03162, 10.6985, 1.09399 ,10.748, 13.6283, 10.281, 6.56962, 2.34028, 6.70708,
+18.267, 10.2371, 5.42167, 6.14, 5.29529, 19.6752, 5.72411, 8.03705, 7.5594, 17.4811, 15.6231};
+
+ Echantillon e;
+ for (unsigned i = 0; i<10; ++i) e.ajouter(v[i]);
+
+  histo1_t h{0,20,20};
+  histo2_t h1{0,20,20};
+  std::stringstream ss;
+  std::stringstream ss1;
+  h.ajouter(e);
+  h1.ajouter(e);
+  h1 << ss1;
+  h << ss;
+  std::cout << ss.str() <<std::endl;
+  std::cout << ss1.str() <<std::endl;
+  REQUIRE(1==1);
+}
 
 // Fin //-------------------------------------------------------------------------------------------

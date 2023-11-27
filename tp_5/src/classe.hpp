@@ -24,4 +24,16 @@ public:
     void ajouter() { _quantite++; }
 };
 
+
+bool operator< (const Classe& c1, const Classe& c2) { 
+    return c1.getBorneInf() < c2.getBorneInf();
+}
+
+bool operator> (const Classe& c1, const Classe& c2) { 
+    return c1.getBorneInf() > c2.getBorneInf();
+}
+
+
 #endif
+
+
