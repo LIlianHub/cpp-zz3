@@ -17,8 +17,13 @@ public:
     {
         if (_ressource != nullptr)
         {
+<<<<<<< HEAD
             _ressource->consommer(_besoin);
             if (_ressource->getStock() <= 0)
+=======
+            _ressource.get()->consommer(_besoin);
+            if (_ressource.get()->getStock() <= 0)
+>>>>>>> main
             {
                 _ressource.reset();
                 _ressource = nullptr;
