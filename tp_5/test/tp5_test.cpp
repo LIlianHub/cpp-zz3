@@ -8,6 +8,7 @@
 #include <valeur.hpp>
 #include <echantillon.hpp>
 #include <classe.hpp>
+#include <sstream>
 
 //using Histo = Histogramme; // A utiliser pour les tests 12-13
 using Histo = Histogramme<>; // A utiliser a partir du test 14
@@ -380,7 +381,7 @@ TEST_CASE ( "TP5_Valeurs::Association" ) {
 }
 
 //----------------------------------------------------------------------------------------------- 23
-/*TEST_CASE ( "TP5_Valeurs::Intervalle" ) {
+TEST_CASE ( "TP5_Valeurs::Intervalle" ) {
  using histo_t = Histogramme<>;
 
  double v[] = { 7.0, 9.0, 8.0, 5.0, 10.0, 14.0, 13.0, 6.0, 5.5, 13.5 };
@@ -415,7 +416,7 @@ TEST_CASE ( "TP5_Valeurs::Association" ) {
 
   ++i;
  }
-}*/
+}
 
 TEST_CASE ( "TP5_Valeurs::display" ) {
   using histo2_t = Histogramme<ComparateurQuantite<Classe>>;

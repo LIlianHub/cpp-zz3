@@ -35,6 +35,12 @@ public:
     const std::set<Classe, Comparateur> &getClasses() const { return _classes; }
     const std::multimap<Classe,Valeur> &getValeurs() const { return _multimap; }
 
+    std::pair<std::multimap<Classe,Valeur>::const_iterator,std::multimap<Classe,Valeur>::const_iterator> getValeurs(const Classe& classe)const 
+    {
+        auto it =_multimap.equal_range(classe);
+        return it;
+    }
+
     void ajouter(Echantillon &echantillon)
     {
         for (int i = 0; i < (int)echantillon.getTaille(); i++)
@@ -62,6 +68,26 @@ public:
             _classes.insert(temp);
             _multimap.insert(std::make_pair(temp,value));
         }
+    }
+
+    std::ostream& operator<<(std::ostream& os){
+        for (const Classe &c : _classes)
+        {
+            if (c.getQuantite() !=0){
+            os << "["<<c.getBorneInf()<<","<< c.getBorneSup()<<"] = "<<c.getQuantite() << " :";
+            auto interval = getValeurs(c);
+            
+            while (interval.first != interval.second) {
+                
+                    os <<"("<<(interval.first)->second.getEtudiant()<<"; "<<(interval.first)->second.getNote()<<") ";
+                    ++(interval.first);
+                
+            }
+            os << std::endl;
+            
+            }
+        }
+        return os;
     }
 };
 
